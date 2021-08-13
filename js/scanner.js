@@ -4,27 +4,27 @@ let errorDiv = document.getElementById('error');
 let video = document.getElementById('video');
 let scanResult = document.getElementById("scanResult");
 
-function setup() {	
+function setup() {  
 	let constraints = {video: {facingMode: 'environment'}};
 	navigator.mediaDevices.getUserMedia(constraints)
-		.then(function(mediaStream) {
-			video.srcObject = mediaStream;
-			video.onloadedmetadata = function(e) {
-				video.play();
-				canvasElement.width = video.videoWidth;
-				canvasElement.height = video.videoHeight;
-				scanResult.style.marginTop = video.videoHeight + 20;
-										
-				requestAnimationFrame(getBarcodes);
-			};
-		})
-		.catch(function(err) {  }); 
+	.then(function(mediaStream) {
+		video.srcObject = mediaStream;
+		video.onloadedmetadata = function(e) {
+			video.play();
+			canvasElement.width = video.videoWidth;
+			canvasElement.height = video.videoHeight;
+			scanResult.style.marginTop = video.videoHeight + 20;
+			
+			requestAnimationFrame(getBarcodes);
+		};
+	})
+	.catch(function(err) {  }); 
 }
 
 setup()
 
 async function getBarcodes(){
-
+	
 	if(!video.paused){
 		try{
 			canvasElement.height = video.videoHeight;
@@ -35,11 +35,11 @@ async function getBarcodes(){
 			let code = jsQR(imageData.data, imageData.width, imageData.height, {
 				inversionAttempts: "dontInvert",
 			});
-
+			
 			if (code) {
 				const formData = new FormData();
 				formData.append('qrData', code.data);
-
+				
 				fetch('/scanner.php', {
 					method: 'POST',
 					body: formData
@@ -48,14 +48,14 @@ async function getBarcodes(){
 				.then(result => {
 					timestampDiff = (Math.floor(Date.now() / 1000) - result.created);
 					valid = ((+result.attributes.validFrom + (+result.attributes.validForHours * 3600) ) - Math.floor(Date.now() / 1000));
-
+					
 					if ( timestampDiff < 180 && valid > 0 ) {
 						scanResult.style.background = "green";
 						scanResult.innerHTML = `Geboortedag: ${result.attributes.birthDay}<br/>
-												Geboortemaand: ${result.attributes.birthMonth}<br/>
-												Initialen voornaam: ${result.attributes.firstNameInitial}<br/>
-												Initialen achternaam: ${result.attributes.lastNameInitial}`;
-					} else {
+						Geboortemaand: ${result.attributes.birthMonth}<br/>
+						Initialen voornaam: ${result.attributes.firstNameInitial}<br/>
+						Initialen achternaam: ${result.attributes.lastNameInitial}`;
+						} else {
 						scanResult.style.background = "red";
 						scanResult.innerHTML = "NIET OK";
 					}
