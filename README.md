@@ -3,6 +3,8 @@
 Scans the Dutch QR-code produced by the CoronaCheck app and shows it's validity.
 This is an unofficial tool that is in no way affiliated with CoronaCheck.nl or the Ministry of VWS.
 
+This example is for personal use only. It's only allowed (by Dutch law) to use the official scanner app in other situations.
+
 # Misc
 
 This repository contains the public keys from VWS. You can download the newest versions via https://holder-api.coronacheck.nl/v4/holder/public_keys.
