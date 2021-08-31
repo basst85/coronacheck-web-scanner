@@ -1,17 +1,31 @@
 # Intro
 
-Scans the Dutch QR-code produced by the CoronaCheck app and shows it's validity.
-This is an unofficial tool that is in no way affiliated with CoronaCheck.nl or the Ministry of VWS.
+A web-app to scan the Dutch QR-code produced by the CoronaCheck app and shows it's validity.
+It's completely running client-side in the webbrowser. 
 
-This example is for personal use only. It's only allowed (by Dutch law) to use the official scanner app in other situations.
+This is an unofficial tool that is in no way affiliated with CoronaCheck.nl or the Ministry of VWS.
 
 # Misc
 
 This repository contains the public keys from VWS. You can download the newest versions via https://holder-api.coronacheck.nl/v4/holder/public_keys.
+The main.go script is based on an example created by [Rick van der Zwet](https://github.com/rickvanderzwet/nl-rickvanderzwet-coronacheck-example).
 
-It also contains the coronacheck-scan application, build for Windows and Linux. Which is created by [Rick van der Zwet](https://github.com/rickvanderzwet/nl-rickvanderzwet-coronacheck-example).
-You can also download the source-code of this application and build it on your own: 
-https://github.com/rickvanderzwet/nl-rickvanderzwet-coronacheck-example
+# Installation
+
+* Build the main.go as WebAssembly (wasm) binary:
+```
+GOARCH=wasm GOOS=js go build -o lib.wasm main.go
+```
+* Navigate to the "JS" directory and copy your local wasm_exec.js file:
+```
+cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" .
+```
+* Start the webserver, on port 8080:
+```
+go run server.go
+```
+* Navigate in the webbrowser to http://localhost:8080/scanner.html
+* Allow access to the webcam
 
 # License
 
