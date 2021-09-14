@@ -5,6 +5,8 @@ It's completely running client-side in the webbrowser.
 
 This is an unofficial tool that is in no way affiliated with CoronaCheck.nl or the Ministry of VWS.
 
+Online demo: https://emonkey.nl/public/coronacheck/scanner.html
+
 # Misc
 
 This repository contains the public keys from VWS. You can download the newest versions via https://holder-api.coronacheck.nl/v4/holder/public_keys.
