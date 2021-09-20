@@ -1,11 +1,15 @@
-# Intro
+# Waarschuwing
+Let op:
+Het is momenteel wettelijk niet toegestaan om bij toegang de controle uit te voeren met iets anders dan de officiële CoronaCheck Scanner app: https://wetten.overheid.nl/BWBR0024705/2021-06-24/#HoofdstukVa_Paragraaf3a_Artikel58re
 
+# Intro
 A web-app to scan the Dutch QR-code produced by the CoronaCheck app and shows it's validity.
 It's completely running client-side in the webbrowser. 
 
 This is an unofficial tool that is in no way affiliated with CoronaCheck.nl or the Ministry of VWS.
 
 Online demo: https://emonkey.nl/public/coronacheck/scanner.html
+
 
 # Misc
 
